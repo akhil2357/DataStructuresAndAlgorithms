@@ -1,0 +1,36 @@
+     public static int partition(int input[],int si,int ei){
+        int pivotElement=input[si];
+        int smallerNumCount=0;
+        for(int i=si+1;i<=ei;i++){
+            if(input[i]<pivotElement){
+                smallerNumCount++;
+            }
+        }
+        int temp=input[si+smallerNumCount];
+        input[si+smallerNumCount]=pivotElement;
+        input[si]=temp;
+        int i=si;
+        int j=ei;
+        while(i<j){
+            if(input[i]<pivotElement){
+                i++;
+            }else if(input[j]>=pivotElement){
+                j--;
+            }else{
+                 temp=input[i];
+                input[i]=input[j];
+                input[j]=temp;
+                i++;
+                j--;
+            }
+        }
+        return si+smallerNumCount;
+    }
+    public static void quicksortReal(int input[],int si,int ei){
+        if(si>=ei){
+            return;
+        }
+        int pivotIndex=partition(input,si,ei);
+        quicksortReal(input,si,pivotIndex-1);
+        quicksortReal(input,pivotIndex+1,ei);
+    }
